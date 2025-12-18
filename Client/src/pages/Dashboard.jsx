@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../components/layout/Layout";
 import StatCard from "../components/ui/StatCard";
+import RevenueChart from "../components/ui/RevenueChart";
 import { Users, CreditCard, AlertOctagon, Activity } from "lucide-react";
 
 const Dashboard = () => {
@@ -47,9 +47,9 @@ const Dashboard = () => {
   ];
 
   return (
-    <Layout>
-      <div className="space-y-8">
-        {/* Header Section */}
+    <div className="space-y-8">
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
             Dashboard Overview
@@ -57,68 +57,75 @@ const Dashboard = () => {
           <p className="text-gray-500">Welcome back, Super Admin.</p>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <StatCard key={index} {...stat} />
-          ))}
+        <div className="flex items-center gap-2">
+          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-colors">
+            <span>Last 30 Days</span>
+          </button>
+          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 shadow-lg shadow-blue-500/30 transition-shadow">
+            Download Report
+          </button>
+        </div>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((stat, index) => (
+          <StatCard key={index} {...stat} />
+        ))}
+      </div>
+
+      {/* Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Main Chart Area (Simulated) */}
+        <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="font-bold text-gray-800">TPV & Revenue Trends</h3>
+            <select className="bg-gray-50 border-none text-sm rounded-lg p-2 cursor-pointer focus:ring-2 focus:ring-blue-500/20 outline-none">
+              <option>Last 30 Days</option>
+              <option>Last Quarter</option>
+              <option>This Year</option>
+            </select>
+          </div>
+          {/* Revenue Chart Component */}
+          <RevenueChart />
         </div>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Chart Area (Simulated) */}
-          <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="font-bold text-gray-800">TPV & Revenue Trends</h3>
-              <select className="bg-gray-50 border-none text-sm rounded-lg p-2 cursor-pointer">
-                <option>Last 30 Days</option>
-                <option>Last Quarter</option>
-              </select>
-            </div>
-            {/* Placeholder for Recharts/ChartJS */}
-            <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center text-gray-400">
-              [Area Chart: Revenue vs Time]
-            </div>
-          </div>
-
-          {/* Top Merchants List */}
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <h3 className="font-bold text-gray-800 mb-6">
-              Top Merchants by Health
-            </h3>
-            <div className="space-y-6">
-              {topMerchants.map((merchant, i) => (
-                <div key={i}>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span className="font-medium text-gray-700">
-                      {merchant.name}
-                    </span>
-                    <span className="text-gray-500">{merchant.tpv}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-                      <div
-                        className={`h-full rounded-full ${
-                          merchant.score > 85
-                            ? "bg-green-500"
-                            : merchant.score > 70
-                            ? "bg-yellow-500"
-                            : "bg-red-500"
-                        }`}
-                        style={{ width: `${merchant.score}%` }}
-                      ></div>
-                    </div>
-                    <span className="text-xs font-bold text-gray-600">
-                      {merchant.score}/100
-                    </span>
-                  </div>
+        {/* Top Merchants List */}
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <h3 className="font-bold text-gray-800 mb-6">
+            Top Merchants by Health
+          </h3>
+          <div className="space-y-6">
+            {topMerchants.map((merchant, i) => (
+              <div key={i}>
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="font-medium text-gray-700">
+                    {merchant.name}
+                  </span>
+                  <span className="text-gray-500">{merchant.tpv}</span>
                 </div>
-              ))}
-            </div>
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full ${merchant.score > 85
+                        ? "bg-green-500"
+                        : merchant.score > 70
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
+                        }`}
+                      style={{ width: `${merchant.score}%` }}
+                    ></div>
+                  </div>
+                  <span className="text-xs font-bold text-gray-600">
+                    {merchant.score}/100
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 

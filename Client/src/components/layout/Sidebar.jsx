@@ -1,4 +1,6 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   Home,
   Users,
@@ -7,56 +9,92 @@ import {
   CreditCard,
   Activity,
   Settings,
+  ShieldCheck,
 } from "lucide-react";
 
 const Sidebar = () => {
   const menuItems = [
-    { icon: Home, label: "Overview", active: true },
-    { icon: Users, label: "Merchants", active: false },
-    { icon: PieChart, label: "Analytics", active: false },
-    { icon: AlertTriangle, label: "Alerts", active: false, badge: 7 }, //
-    { icon: CreditCard, label: "Settlements", active: false },
-    { icon: Activity, label: "System Health", active: false },
+    { icon: Home, label: "Overview", path: "/" },
+    { icon: Users, label: "Merchants", path: "/merchants" },
+    { icon: PieChart, label: "Analytics", path: "/analytics" },
+    { icon: AlertTriangle, label: "Alerts", path: "/alerts", badge: 7 },
+    { icon: CreditCard, label: "Settlements", path: "/settlements" },
+    { icon: Activity, label: "System Health", path: "/health" },
   ];
 
   return (
-    <div className="w-64 h-screen bg-slate-900 text-white flex flex-col fixed left-0 top-0">
-      <div className="p-6">
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-200 bg-clip-text text-transparent">
-          SubversePay
-        </h1>
+    <aside className="w-64 h-screen fixed left-0 top-0 z-50 flex flex-col bg-[#0f172a] text-white shadow-2xl overflow-hidden border-r border-slate-800">
+      {/* Premium Gradient Background Accent */}
+      <div className="absolute top-0 left-0 w-full h-64 bg-[#4169E1] opacity-10 blur-[100px] pointer-events-none" />
+
+      {/* Brand Section */}
+      <div className="p-8 relative z-10">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-2 rounded-xl shadow-lg shadow-blue-500/20 text-white">
+            <ShieldCheck size={24} strokeWidth={2.5} />
+          </div>
+          <h1 className="text-xl font-bold tracking-tight text-white">
+            Subverse<span className="text-blue-400">Pay</span>
+          </h1>
+        </div>
+        <p className="text-xs text-slate-400 font-medium pl-14">Super Admin</p>
       </div>
 
-      <nav className="flex-1 px-4 space-y-2">
+      {/* Navigation */}
+      <nav className="flex-1 px-4 space-y-2 relative z-10 py-4">
         {menuItems.map((item, index) => (
-          <button
+          <NavLink
             key={index}
-            className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 group ${
-              item.active
-                ? "bg-blue-600 shadow-lg shadow-blue-900/50 text-white"
-                : "text-slate-400 hover:bg-slate-800 hover:text-white"
-            }`}
+            to={item.path}
+            className={({ isActive }) =>
+              `relative group flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-300 ease-out ${isActive
+                ? "bg-gradient-to-r from-blue-600/90 to-indigo-600/90 text-white shadow-lg shadow-blue-500/25"
+                : "text-slate-400 hover:text-white hover:bg-slate-800/50"
+              }`
+            }
           >
-            <div className="flex items-center gap-3">
-              <item.icon size={20} />
-              <span className="font-medium">{item.label}</span>
-            </div>
-            {item.badge && (
-              <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
-                {item.badge}
-              </span>
+            {({ isActive }) => (
+              <>
+                <div className="flex items-center gap-3.5">
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute left-0 w-1 h-8 bg-white rounded-r-full shadow-[0_0_10px_2px_rgba(255,255,255,0.3)]"
+                    />
+                  )}
+                  <item.icon
+                    size={20}
+                    className={`transition-colors duration-300 ${isActive ? 'text-white' : 'group-hover:text-blue-400'}`}
+                    strokeWidth={isActive ? 2.5 : 2}
+                  />
+                  <span className={`font-medium tracking-wide ${isActive ? 'text-white' : ''}`}>{item.label}</span>
+                </div>
+                {item.badge && (
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm border ${isActive ? 'bg-white/20 text-white border-transparent' : 'bg-red-500/10 text-red-400 border-red-500/20'
+                    }`}>
+                    {item.badge}
+                  </span>
+                )}
+              </>
             )}
-          </button>
+          </NavLink>
         ))}
       </nav>
 
-      <div className="p-4 border-t border-slate-800">
-        <button className="flex items-center gap-3 text-slate-400 hover:text-white transition-colors">
-          <Settings size={20} />
-          <span>Settings</span>
-        </button>
+      {/* Bottom Actions */}
+      <div className="p-4 relative z-10 border-t border-slate-800/50">
+        <NavLink
+          to="/settings"
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-4 py-3 rounded-xl transition-all w-full group ${isActive ? "bg-gradient-to-r from-blue-600/90 to-indigo-600/90 text-white shadow-lg" : "text-slate-400 hover:text-white hover:bg-slate-800/50"
+            }`
+          }
+        >
+          <Settings size={20} className="group-hover:rotate-90 transition-transform duration-500" />
+          <span className="font-medium">Settings</span>
+        </NavLink>
       </div>
-    </div>
+    </aside>
   );
 };
 
