@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     MoreHorizontal,
@@ -18,7 +19,8 @@ import {
     X,
     Building,
     CreditCard,
-    FileText
+    FileText,
+    UserCheck
 } from 'lucide-react';
 import MerchantDetailsModalContent from './MerchantDetailsModalContent';
 
@@ -152,6 +154,10 @@ const ActiveMerchantsTable = () => {
                     />
                 </div>
                 <div className="flex gap-3 w-full sm:w-auto">
+                    <Link to="/approvals" className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-600 rounded-xl hover:bg-slate-50 transition-all font-medium shadow-sm">
+                        <UserCheck size={18} />
+                        <span>Approvals</span>
+                    </Link>
                     <div className="relative group">
                         <button className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-600 rounded-xl hover:bg-slate-50 transition-all font-medium shadow-sm">
                             <Filter size={18} />
@@ -177,19 +183,19 @@ const ActiveMerchantsTable = () => {
             </div>
 
             {/* Table */}
-            <div className="bg-white/70 backdrop-blur-3xl rounded-3xl border border-white/60 shadow-xl overflow-hidden">
+            <div className="bg-white/80 backdrop-blur-3xl rounded-2xl border border-white/60 shadow-xl overflow-hidden shadow-slate-200/50">
                 <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead>
                             <tr className="border-b border-slate-100">
-                                <th className="px-8 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Merchant Name</th>
-                                <th className="px-6 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Sector</th>
-                                <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Subscribers</th>
-                                <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">TPV</th>
-                                <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Revenue (Comm.)</th>
-                                <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Growth</th>
-                                <th className="px-6 py-5 text-center text-xs font-bold text-slate-400 uppercase tracking-wider">Status</th>
-                                <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Actions</th>
+                                <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-400 uppercase tracking-wider">Merchant Name</th>
+                                <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sector</th>
+                                <th className="px-4 py-3 text-right text-[10px] font-bold text-slate-400 uppercase tracking-wider">Subscribers</th>
+                                <th className="px-4 py-3 text-right text-[10px] font-bold text-slate-400 uppercase tracking-wider">TPV</th>
+                                <th className="px-4 py-3 text-right text-[10px] font-bold text-slate-400 uppercase tracking-wider">Revenue (Comm.)</th>
+                                <th className="px-4 py-3 text-right text-[10px] font-bold text-slate-400 uppercase tracking-wider">Growth</th>
+                                <th className="px-4 py-3 text-center text-[10px] font-bold text-slate-400 uppercase tracking-wider">Status</th>
+                                <th className="px-4 py-3 text-right text-[10px] font-bold text-slate-400 uppercase tracking-wider">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-50 relative">
@@ -203,51 +209,51 @@ const ActiveMerchantsTable = () => {
                                         transition={{ duration: 0.2, delay: index * 0.05 }}
                                         className="group hover:bg-blue-50/50 transition-colors relative"
                                     >
-                                        <td className="px-8 py-5 cursor-pointer" onClick={() => setSelectedMerchant(merchant)}>
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center text-blue-700 font-bold shadow-inner">
+                                        <td className="px-4 py-3 cursor-pointer" onClick={() => setSelectedMerchant(merchant)}>
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center text-blue-700 font-bold shadow-inner text-xs">
                                                     {merchant.logo}
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{merchant.name}</div>
-                                                    <div className="text-xs text-slate-400 font-medium">#{merchant.id}</div>
+                                                    <div className="font-bold text-slate-800 text-sm group-hover:text-blue-600 transition-colors">{merchant.name}</div>
+                                                    <div className="text-[10px] text-slate-400 font-medium">#{merchant.id}</div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-5">
-                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-slate-100 text-slate-800">
+                                        <td className="px-4 py-3">
+                                            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-medium bg-slate-100 text-slate-800">
                                                 {merchant.sector}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-5 text-right font-medium text-slate-600">{merchant.subscribers.toLocaleString()}</td>
-                                        <td className="px-6 py-5 text-right font-bold text-slate-900">{merchant.tpv}</td>
-                                        <td className="px-6 py-5 text-right font-bold text-green-600">{merchant.revenue}</td>
-                                        <td className="px-6 py-5 text-right">
-                                            <div className={`inline-flex items-center gap-1 font-bold ${merchant.growth >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
-                                                {merchant.growth >= 0 ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
+                                        <td className="px-4 py-3 text-right font-medium text-slate-600 text-xs">{merchant.subscribers.toLocaleString()}</td>
+                                        <td className="px-4 py-3 text-right font-bold text-slate-900 text-xs">{merchant.tpv}</td>
+                                        <td className="px-4 py-3 text-right font-bold text-green-600 text-xs">{merchant.revenue}</td>
+                                        <td className="px-4 py-3 text-right">
+                                            <div className={`inline-flex items-center gap-1 font-bold text-xs ${merchant.growth >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
+                                                {merchant.growth >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
                                                 {Math.abs(merchant.growth)}%
                                             </div>
                                         </td>
-                                        <td className="px-6 py-5 text-center">
-                                            <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${merchant.status === 'Active'
+                                        <td className="px-4 py-3 text-center">
+                                            <div className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${merchant.status === 'Active'
                                                 ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20'
                                                 : 'bg-rose-500/10 text-rose-600 border-rose-500/20'
                                                 }`}>
                                                 {merchant.status}
                                             </div>
                                         </td>
-                                        <td className="px-6 py-5 text-right">
-                                            <div className="flex items-center justify-end gap-2">
-                                                <button onClick={() => setSelectedMerchant(merchant)} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
-                                                    <Eye size={18} />
+                                        <td className="px-4 py-3 text-right">
+                                            <div className="flex items-center justify-end gap-1">
+                                                <button onClick={() => setSelectedMerchant(merchant)} className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                                                    <Eye size={14} />
                                                 </button>
                                                 {merchant.status === 'Active' ? (
-                                                    <button onClick={() => handleDeactivateClick(merchant.id)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
-                                                        <Ban size={18} />
+                                                    <button onClick={() => handleDeactivateClick(merchant.id)} className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
+                                                        <Ban size={14} />
                                                     </button>
                                                 ) : (
-                                                    <button onClick={() => handleActivate(merchant.id)} className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors">
-                                                        <Power size={18} />
+                                                    <button onClick={() => handleActivate(merchant.id)} className="p-1.5 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors">
+                                                        <Power size={14} />
                                                     </button>
                                                 )}
                                             </div>

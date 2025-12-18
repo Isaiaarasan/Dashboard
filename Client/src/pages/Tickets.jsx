@@ -37,7 +37,7 @@ const Tickets = () => {
                     <h1 className="text-2xl font-bold text-gray-900">Support Tickets</h1>
                     <p className="text-gray-500">Manage and resolve user issues.</p>
                 </div>
-                <button className="bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg shadow-blue-500/30">
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg shadow-blue-500/30">
                     Create Ticket
                 </button>
             </div>
@@ -46,13 +46,13 @@ const Tickets = () => {
             <div className="flex border-b border-gray-200 shrink-0">
                 <button
                     onClick={() => setActiveTab('active')}
-                    className={`px-6 py-3 text-sm font-medium transition-colors border-b-2 ${activeTab === 'active' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
+                    className={`px-4 py-2 text-xs font-medium transition-colors border-b-2 ${activeTab === 'active' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
                 >
                     Active Tickets
                 </button>
                 <button
                     onClick={() => setActiveTab('closed')}
-                    className={`px-6 py-3 text-sm font-medium transition-colors border-b-2 ${activeTab === 'closed' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
+                    className={`px-4 py-2 text-xs font-medium transition-colors border-b-2 ${activeTab === 'closed' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-800'}`}
                 >
                     Closed Tickets
                 </button>
@@ -61,7 +61,7 @@ const Tickets = () => {
             {/* Tickets Interface */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1 overflow-hidden">
                 {/* List Column */}
-                <div className="lg:col-span-1 bg-white border border-gray-100 rounded-xl overflow-hidden flex flex-col shadow-sm">
+                <div className="lg:col-span-1 bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl overflow-hidden flex flex-col shadow-lg shadow-slate-200/50">
                     <div className="p-4 border-b border-gray-100 bg-gray-50/50">
                         <input type="text" placeholder="Search tickets..." className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500" />
                     </div>
@@ -70,7 +70,7 @@ const Tickets = () => {
                             <div
                                 key={ticket.id}
                                 onClick={() => handleTicketClick(ticket)}
-                                className={`p-4 rounded-xl border transition-all cursor-pointer group ${selectedTicket?.id === ticket.id ? 'bg-blue-50 border-blue-200 shadow-sm' : 'border-gray-100 hover:bg-gray-50'}`}
+                                className={`p-3 rounded-xl border transition-all cursor-pointer group ${selectedTicket?.id === ticket.id ? 'bg-blue-50 border-blue-200 shadow-sm' : 'border-gray-100 hover:bg-gray-50'}`}
                             >
                                 <div className="flex justify-between items-start mb-2">
                                     <span className="text-xs font-mono text-gray-400 font-bold">{ticket.id}</span>
@@ -94,7 +94,7 @@ const Tickets = () => {
                 </div>
 
                 {/* Detail View */}
-                <div className="lg:col-span-2 bg-white rounded-xl border border-gray-100 shadow-sm flex flex-col overflow-hidden relative">
+                <div className="lg:col-span-2 bg-white/80 backdrop-blur-xl rounded-2xl border border-white/60 shadow-lg shadow-slate-200/50 flex flex-col overflow-hidden relative">
                     {selectedTicket ? (
                         <>
                             {/* Detailed Header */}

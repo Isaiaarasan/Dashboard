@@ -48,7 +48,7 @@ const ComparisonGraph = () => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px]">
+        <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-white/60 shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300 flex flex-col h-[400px]">
             {/* Header with Tabs */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                 <div>

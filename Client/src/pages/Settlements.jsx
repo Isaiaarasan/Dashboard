@@ -3,11 +3,11 @@ import { Download, Search, Filter } from "lucide-react";
 
 const Settlements = () => {
     const settlements = [
-        { id: "SET-2024-001", merchant: "SpeedNet ISP", amount: "₹45,200.00", status: "Completed", date: "Oct 24, 2024" },
-        { id: "SET-2024-002", merchant: "CableNet Solutions", amount: "₹12,450.00", status: "Processing", date: "Oct 24, 2024" },
-        { id: "SET-2024-003", merchant: "FitZone Gyms", amount: "₹8,900.00", status: "Failed", date: "Oct 23, 2024" },
-        { id: "SET-2024-004", merchant: "TechStart Hub", amount: "₹1,25,000.00", status: "Completed", date: "Oct 23, 2024" },
-        { id: "SET-2024-005", merchant: "Coffee House Chain", amount: "₹3,400.00", status: "Completed", date: "Oct 22, 2024" },
+        { id: "SET-2024-001", from: "SubversePay", to: "SpeedNet ISP", amount: "₹45,200.00", status: "Completed", date: "Oct 24, 2024", bankLogo: "HDFC" },
+        { id: "SET-2024-002", from: "SubversePay", to: "CableNet Sols", amount: "₹12,450.00", status: "Processing", date: "Oct 24, 2024", bankLogo: "ICICI" },
+        { id: "SET-2024-003", from: "SubversePay", to: "FitZone Gyms", amount: "₹8,900.00", status: "Failed", date: "Oct 23, 2024", bankLogo: "SBI" },
+        { id: "SET-2024-004", from: "SubversePay", to: "TechStart Hub", amount: "₹1,25,000.00", status: "Completed", date: "Oct 23, 2024", bankLogo: "AXIS" },
+        { id: "SET-2024-005", from: "SubversePay", to: "Coffee House", amount: "₹3,400.00", status: "Completed", date: "Oct 22, 2024", bankLogo: "PNB" },
     ];
 
     return (
@@ -38,37 +38,36 @@ const Settlements = () => {
                 </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg shadow-slate-200/50 border border-white/60 overflow-hidden">
                 <table className="w-full text-left">
                     <thead className="bg-gray-50/50 border-b border-gray-100">
                         <tr>
-                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Txn ID</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">From</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">To</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Bank</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Amount</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Date</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Status</th>
+                            <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Txn ID</th>
+                            <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">From</th>
+                            <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">To</th>
+                            <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Bank</th>
+                            <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Amount</th>
+                            <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Date</th>
+                            <th className="px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Status</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-50">
                         {settlements.map((item) => (
-                            <tr key={item.id} className="hover:bg-gray-50/50 transition-colors text-sm">
-                                <td className="px-6 py-4 font-mono text-blue-600">{item.id}</td>
-                                <td className="px-6 py-4 font-medium text-gray-700">SubversePay</td>
-                                <td className="px-6 py-4 font-medium text-gray-900">{item.merchant}</td>
-                                <td className="px-6 py-4">
+                            <tr key={item.id} className="hover:bg-gray-50/50 transition-colors text-xs">
+                                <td className="px-4 py-3 font-mono text-blue-600 font-bold">{item.id}</td>
+                                <td className="px-4 py-3 font-medium text-gray-500">{item.from}</td>
+                                <td className="px-4 py-3 font-bold text-gray-900">{item.to}</td>
+                                <td className="px-4 py-3">
                                     <div className="flex items-center gap-2">
-                                        <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-[8px] font-bold border border-gray-200">
-                                            HDFC
+                                        <div className="w-6 h-6 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-[8px] font-bold text-gray-700">
+                                            {item.bankLogo}
                                         </div>
-                                        <span className="text-gray-500">**** 4521</span>
                                     </div>
                                 </td>
-                                <td className="px-6 py-4 font-bold text-gray-800">{item.amount}</td>
-                                <td className="px-6 py-4 text-gray-500">{item.date}</td>
-                                <td className="px-6 py-4">
-                                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.status === 'Completed' ? 'bg-green-100 text-green-800' :
+                                <td className="px-4 py-3 font-bold text-gray-800">{item.amount}</td>
+                                <td className="px-4 py-3 text-gray-500">{item.date}</td>
+                                <td className="px-4 py-3">
+                                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium ${item.status === 'Completed' ? 'bg-green-100 text-green-800' :
                                         item.status === 'Processing' ? 'bg-yellow-100 text-yellow-800' :
                                             'bg-red-100 text-red-800'
                                         }`}>

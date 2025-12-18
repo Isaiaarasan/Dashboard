@@ -16,7 +16,7 @@ const TicketOverlayGraph = () => {
     const maxVal = 60;
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-80 flex flex-col">
+        <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-white/60 shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300 h-80 flex flex-col">
             <h3 className="font-bold text-gray-800 mb-6">Support Efficiency</h3>
             <div className="flex-1 flex items-end justify-between gap-3 relative px-2">
                 {/* Grid Lines */}

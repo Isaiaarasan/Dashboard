@@ -51,18 +51,18 @@ const SystemHealth = () => {
             </div>
 
             {/* Performance Metrics */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h3 className="text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Total Requests (24h)</h3>
-                    <div className="text-3xl font-bold text-gray-900">14.2M</div>
-                    <div className="text-green-500 text-xs font-medium mt-1">+5% vs yesterday</div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white/80 backdrop-blur-xl p-4 rounded-2xl border border-white/60 shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300">
+                    <h3 className="text-gray-500 text-[10px] font-bold uppercase tracking-wider mb-2">Total Requests (24h)</h3>
+                    <div className="text-2xl font-bold text-gray-900">14.2M</div>
+                    <div className="text-green-500 text-[10px] font-medium mt-1">+5% vs yesterday</div>
                 </div>
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                    <h3 className="text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Failed Requests</h3>
-                    <div className="text-3xl font-bold text-gray-900">421</div>
-                    <div className="text-red-500 text-xs font-medium mt-1">0.003% Failure Rate</div>
+                <div className="bg-white/80 backdrop-blur-xl p-4 rounded-2xl border border-white/60 shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300">
+                    <h3 className="text-gray-500 text-[10px] font-bold uppercase tracking-wider mb-2">Failed Requests</h3>
+                    <div className="text-2xl font-bold text-gray-900">421</div>
+                    <div className="text-red-500 text-[10px] font-medium mt-1">0.003% Failure Rate</div>
                 </div>
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <div className="bg-white/80 backdrop-blur-xl p-4 rounded-2xl border border-white/60 shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300">
                     <h3 className="text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Supabase Logs</h3>
                     <a href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-600 font-bold hover:underline">
                         Open Dashboard <ExternalLink size={14} />
@@ -72,7 +72,7 @@ const SystemHealth = () => {
             </div>
 
             {/* API Latency Linear Graph */}
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-80 flex flex-col">
+            <div className="bg-white/80 backdrop-blur-xl p-6 rounded-2xl border border-white/60 shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300 h-80 flex flex-col">
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h3 className="font-bold text-gray-800 flex items-center gap-2">
@@ -141,31 +141,31 @@ const SystemHealth = () => {
             </div>
 
             {/* API Error Log */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
-                    <h3 className="font-bold text-gray-800 flex items-center gap-2">
-                        <AlertTriangle size={18} className="text-red-500" /> Recent 500 Errors
+            <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg shadow-slate-200/50 border border-white/60 overflow-hidden">
+                <div className="px-4 py-3 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+                    <h3 className="font-bold text-gray-800 text-sm flex items-center gap-2">
+                        <AlertTriangle size={16} className="text-red-500" /> Recent 500 Errors
                     </h3>
                     <button className="text-xs font-bold text-blue-600 hover:underline">View All Logs</button>
                 </div>
                 <table className="w-full text-left">
                     <thead className="bg-gray-50 border-b border-gray-100">
                         <tr>
-                            <th className="px-6 py-3 text-xs font-extrabold text-gray-400 uppercase">Code</th>
-                            <th className="px-6 py-3 text-xs font-extrabold text-gray-400 uppercase">Time</th>
-                            <th className="px-6 py-3 text-xs font-extrabold text-gray-400 uppercase">Endpoint</th>
-                            <th className="px-6 py-3 text-xs font-extrabold text-gray-400 uppercase">Message</th>
+                            <th className="px-4 py-2 text-[10px] font-extrabold text-gray-400 uppercase">Code</th>
+                            <th className="px-4 py-2 text-[10px] font-extrabold text-gray-400 uppercase">Time</th>
+                            <th className="px-4 py-2 text-[10px] font-extrabold text-gray-400 uppercase">Endpoint</th>
+                            <th className="px-4 py-2 text-[10px] font-extrabold text-gray-400 uppercase">Message</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-50">
                         {errorLogs.map((log) => (
                             <tr key={log.id} className="hover:bg-red-50/10 transition-colors">
-                                <td className="px-6 py-4">
-                                    <span className="px-2 py-1 bg-red-100 text-red-700 rounded-md text-xs font-bold">{log.code}</span>
+                                <td className="px-4 py-3">
+                                    <span className="px-1.5 py-0.5 bg-red-100 text-red-700 rounded-md text-[10px] font-bold">{log.code}</span>
                                 </td>
-                                <td className="px-6 py-4 text-sm font-mono text-gray-500">{log.time}</td>
-                                <td className="px-6 py-4 text-sm font-mono text-gray-700">{log.endpoint}</td>
-                                <td className="px-6 py-4 text-sm text-red-600 font-medium">{log.message}</td>
+                                <td className="px-4 py-3 text-xs font-mono text-gray-500">{log.time}</td>
+                                <td className="px-4 py-3 text-xs font-mono text-gray-700">{log.endpoint}</td>
+                                <td className="px-4 py-3 text-xs text-red-600 font-medium">{log.message}</td>
                             </tr>
                         ))}
                     </tbody>

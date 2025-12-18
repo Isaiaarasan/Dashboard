@@ -91,23 +91,23 @@ const Alerts = () => {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className={`flex items-start gap-4 p-5 rounded-xl border ${getTypeStyles(alert.type)} relative group`}
+                        className={`flex items-start gap-3 p-4 rounded-xl border ${getTypeStyles(alert.type)} relative group`}
                     >
-                        <div className="mt-1 flex-shrink-0 bg-white p-2 rounded-full shadow-sm">
+                        <div className="mt-0.5 flex-shrink-0 bg-white p-1.5 rounded-full shadow-sm">
                             {getIcon(alert.type)}
                         </div>
                         <div className="flex-1">
                             <div className="flex justify-between items-start">
                                 <div className="flex items-center gap-2">
-                                    <h3 className="font-bold text-lg">{alert.type} Alert</h3>
-                                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-white/50 border border-black/5 uppercase tracking-wide opacity-70">
+                                    <h3 className="font-bold text-sm">{alert.type} Alert</h3>
+                                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/50 border border-black/5 uppercase tracking-wide opacity-70">
                                         {alert.category}
                                     </span>
                                 </div>
-                                <button className="text-black/20 hover:text-black/50 transition-colors"><X size={18} /></button>
+                                <button className="text-black/20 hover:text-black/50 transition-colors"><X size={14} /></button>
                             </div>
-                            <p className="mt-1 font-medium opacity-90">{alert.message}</p>
-                            <div className="flex items-center gap-4 mt-3 text-xs opacity-70 font-semibold uppercase tracking-wide">
+                            <p className="mt-1 text-xs font-medium opacity-90">{alert.message}</p>
+                            <div className="flex items-center gap-4 mt-2 text-[10px] opacity-70 font-semibold uppercase tracking-wide">
                                 <span>Source: {alert.source}</span>
                                 <span>•</span>
                                 <span>{alert.time}</span>

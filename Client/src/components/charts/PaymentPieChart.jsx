@@ -20,8 +20,8 @@ const PaymentPieChart = () => {
     let currentOffset = 0;
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-80 flex flex-col items-center">
-            <h3 className="font-bold text-gray-800 mb-2 w-full text-left">Payment Methods</h3>
+        <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-white/60 shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300 h-80 flex flex-col items-center">
+            <h3 className="font-bold text-gray-800 mb-2 w-full text-left">Payment Method Distribution</h3>
 
             <div className="relative flex-1 flex items-center justify-center">
                 <svg width={size} height={size} className="transform -rotate-90">
@@ -55,13 +55,11 @@ const PaymentPieChart = () => {
                 </svg>
             </div>
 
-            <div className="grid grid-cols-2 gap-x-8 gap-y-2 mt-2 w-full px-4">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-2 w-full px-4">
                 {data.map((item, idx) => (
-                    <div key={idx} className="flex items-center justify-between text-xs">
-                        <div className="flex items-center gap-2">
-                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
-                            <span className="text-gray-600">{item.label}</span>
-                        </div>
+                    <div key={idx} className="flex items-center gap-2 text-[10px]">
+                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }} />
+                        <span className="text-gray-600">{item.label}</span>
                         <span className="font-bold text-gray-900">{item.value}%</span>
                     </div>
                 ))}

@@ -16,7 +16,7 @@ const SuccessScoreGraph = () => {
     const maxVal = Math.max(...data.map(d => d.total));
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-80">
+        <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-white/60 shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300 h-full flex flex-col justify-between">
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <h3 className="font-bold text-gray-800">Success Score</h3>
