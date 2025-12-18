@@ -42,21 +42,31 @@ const Settlements = () => {
                 <table className="w-full text-left">
                     <thead className="bg-gray-50/50 border-b border-gray-100">
                         <tr>
-                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Settlement ID</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Merchant</th>
+                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Txn ID</th>
+                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">From</th>
+                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">To</th>
+                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Bank</th>
                             <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Amount</th>
                             <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Date</th>
                             <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Status</th>
-                            <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-50">
                         {settlements.map((item) => (
-                            <tr key={item.id} className="hover:bg-gray-50/50 transition-colors">
-                                <td className="px-6 py-4 text-sm font-medium text-blue-600">{item.id}</td>
-                                <td className="px-6 py-4 text-sm text-gray-900">{item.merchant}</td>
-                                <td className="px-6 py-4 text-sm font-mono text-gray-700">{item.amount}</td>
-                                <td className="px-6 py-4 text-sm text-gray-500">{item.date}</td>
+                            <tr key={item.id} className="hover:bg-gray-50/50 transition-colors text-sm">
+                                <td className="px-6 py-4 font-mono text-blue-600">{item.id}</td>
+                                <td className="px-6 py-4 font-medium text-gray-700">SubversePay</td>
+                                <td className="px-6 py-4 font-medium text-gray-900">{item.merchant}</td>
+                                <td className="px-6 py-4">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-[8px] font-bold border border-gray-200">
+                                            HDFC
+                                        </div>
+                                        <span className="text-gray-500">**** 4521</span>
+                                    </div>
+                                </td>
+                                <td className="px-6 py-4 font-bold text-gray-800">{item.amount}</td>
+                                <td className="px-6 py-4 text-gray-500">{item.date}</td>
                                 <td className="px-6 py-4">
                                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.status === 'Completed' ? 'bg-green-100 text-green-800' :
                                         item.status === 'Processing' ? 'bg-yellow-100 text-yellow-800' :
@@ -64,9 +74,6 @@ const Settlements = () => {
                                         }`}>
                                         {item.status}
                                     </span>
-                                </td>
-                                <td className="px-6 py-4 text-right">
-                                    <button className="text-gray-400 hover:text-blue-600">View</button>
                                 </td>
                             </tr>
                         ))}

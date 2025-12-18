@@ -14,11 +14,16 @@ import {
     TrendingDown,
     Wifi,
     Tv,
-    Dumbbell
+    Dumbbell,
+    X,
+    Building,
+    CreditCard,
+    FileText
 } from 'lucide-react';
+import MerchantDetailsModalContent from './MerchantDetailsModalContent';
 
 const ActiveMerchantsTable = () => {
-    // Mock Data based on the structure
+    // Mock Data
     const [merchants, setMerchants] = useState([
         {
             id: 1,
@@ -26,10 +31,15 @@ const ActiveMerchantsTable = () => {
             sector: 'Internet',
             subscribers: 12500,
             tpv: '₹3.5 Cr',
-            revenue: '₹12.5 L',
-            growth: 12.5, // Percentage
+            revenue: '₹12.5 L', // Commission
+            growth: 12.5,
             status: 'Active',
-            logo: 'SN'
+            logo: 'SN',
+            email: "contact@speednet.com",
+            phone: "+91 98765 43210",
+            address: "123, Tech Park, Bangalore",
+            gst: "29ABCDE1234F1Z5",
+            bank: { name: "HDFC Bank", acc: "1234567890", ifsc: "HDFC0001234" }
         },
         {
             id: 2,
@@ -38,9 +48,14 @@ const ActiveMerchantsTable = () => {
             subscribers: 8200,
             tpv: '₹2.1 Cr',
             revenue: '₹8.2 L',
-            growth: -2.4, // Negative growth
+            growth: -2.4,
             status: 'Active',
-            logo: 'CN'
+            logo: 'CN',
+            email: "support@cablenet.in",
+            phone: "+91 98765 11111",
+            address: "45, Media Street, Mumbai",
+            gst: "27AAAAA0000A1Z5",
+            bank: { name: "ICICI Bank", acc: "0987654321", ifsc: "ICIC0001234" }
         },
         {
             id: 3,
@@ -51,7 +66,12 @@ const ActiveMerchantsTable = () => {
             revenue: '₹3.5 L',
             growth: 5.8,
             status: 'Active',
-            logo: 'FZ'
+            logo: 'FZ',
+            email: "info@fitzone.com",
+            phone: "+91 98765 22222",
+            address: "78, Health Avenue, Delhi",
+            gst: "07BBBBB1111B1Z5",
+            bank: { name: "SBI", acc: "1122334455", ifsc: "SBIN0001234" }
         },
         {
             id: 4,
@@ -62,7 +82,12 @@ const ActiveMerchantsTable = () => {
             revenue: '₹6.1 L',
             growth: 8.1,
             status: 'Active',
-            logo: 'UF'
+            logo: 'UF',
+            email: "hello@urbanfiber.net",
+            phone: "+91 98765 33333",
+            address: "90, Cyber City, Gurgaon",
+            gst: "06CCCCC2222C1Z5",
+            bank: { name: "Axis Bank", acc: "6789012345", ifsc: "UTIB0001234" }
         },
         {
             id: 5,
@@ -73,12 +98,20 @@ const ActiveMerchantsTable = () => {
             revenue: '₹2.8 L',
             growth: 0.5,
             status: 'Inactive',
-            logo: 'MC'
+            logo: 'MC',
+            email: "contact@metrocable.com",
+            phone: "+91 98765 44444",
+            address: "10, Film City, Noida",
+            gst: "09DDDDD3333D1Z5",
+            bank: { name: "PNB", acc: "5544332211", ifsc: "PUNB0001234" }
         },
     ]);
 
     const [searchQuery, setSearchQuery] = useState('');
-    const [statusFilter, setStatusFilter] = useState('all'); // all, Active, Inactive
+    const [statusFilter, setStatusFilter] = useState('all');
+    const [selectedMerchant, setSelectedMerchant] = useState(null); // For Details View
+    const [deactivateId, setDeactivateId] = useState(null); // For Deactivate Modal
+    const [deactivateReason, setDeactivateReason] = useState("");
 
     const filteredMerchants = merchants.filter(merchant => {
         const matchesSearch = merchant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -87,11 +120,15 @@ const ActiveMerchantsTable = () => {
         return matchesSearch && matchesStatus;
     });
 
-    const handleDeactivate = (id) => {
-        const reason = prompt("Enter reason for deactivation:");
-        if (reason && window.confirm("Are you sure you want to deactivate this merchant?")) {
-            setMerchants(merchants.map(m => m.id === id ? { ...m, status: 'Inactive' } : m));
-        }
+    const handleDeactivateClick = (id) => {
+        setDeactivateId(id);
+        setDeactivateReason("");
+    };
+
+    const confirmDeactivate = () => {
+        if (!deactivateReason) return alert("Please provide a reason.");
+        setMerchants(merchants.map(m => m.id === deactivateId ? { ...m, status: 'Inactive' } : m));
+        setDeactivateId(null);
     };
 
     const handleActivate = (id) => {
@@ -101,8 +138,8 @@ const ActiveMerchantsTable = () => {
     };
 
     return (
-        <div className="space-y-6">
-            {/* Action Bar */}
+        <div className="space-y-6 relative">
+            {/* Search & Filter Bar */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/70 backdrop-blur-xl p-4 rounded-2xl border border-white/50 shadow-sm">
                 <div className="relative w-full sm:w-96 group">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={20} />
@@ -116,11 +153,10 @@ const ActiveMerchantsTable = () => {
                 </div>
                 <div className="flex gap-3 w-full sm:w-auto">
                     <div className="relative group">
-                        <button className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-600 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all font-medium shadow-sm">
+                        <button className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-600 rounded-xl hover:bg-slate-50 transition-all font-medium shadow-sm">
                             <Filter size={18} />
                             <span>{statusFilter === 'all' ? 'All Status' : statusFilter}</span>
                         </button>
-                        {/* Simple Dropdown for Filter */}
                         <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 p-2 hidden group-hover:block z-20">
                             {['all', 'Active', 'Inactive'].map(status => (
                                 <button
@@ -140,17 +176,17 @@ const ActiveMerchantsTable = () => {
                 </div>
             </div>
 
-            {/* Premium Table/List View */}
+            {/* Table */}
             <div className="bg-white/70 backdrop-blur-3xl rounded-3xl border border-white/60 shadow-xl overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead>
                             <tr className="border-b border-slate-100">
-                                <th className="px-8 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Merchant</th>
+                                <th className="px-8 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Merchant Name</th>
                                 <th className="px-6 py-5 text-left text-xs font-bold text-slate-400 uppercase tracking-wider">Sector</th>
                                 <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Subscribers</th>
                                 <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">TPV</th>
-                                <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Revenue</th>
+                                <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Revenue (Comm.)</th>
                                 <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Growth</th>
                                 <th className="px-6 py-5 text-center text-xs font-bold text-slate-400 uppercase tracking-wider">Status</th>
                                 <th className="px-6 py-5 text-right text-xs font-bold text-slate-400 uppercase tracking-wider">Actions</th>
@@ -167,34 +203,25 @@ const ActiveMerchantsTable = () => {
                                         transition={{ duration: 0.2, delay: index * 0.05 }}
                                         className="group hover:bg-blue-50/50 transition-colors relative"
                                     >
-                                        <td className="px-8 py-5">
+                                        <td className="px-8 py-5 cursor-pointer" onClick={() => setSelectedMerchant(merchant)}>
                                             <div className="flex items-center gap-4">
                                                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center text-blue-700 font-bold shadow-inner">
                                                     {merchant.logo}
                                                 </div>
                                                 <div>
-                                                    <div className="font-bold text-slate-900">{merchant.name}</div>
-                                                    <div className="text-xs text-slate-400 font-medium">ID: #{merchant.id.toString().padStart(4, '0')}</div>
+                                                    <div className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{merchant.name}</div>
+                                                    <div className="text-xs text-slate-400 font-medium">#{merchant.id}</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-6 py-5">
-                                            <div className="flex items-center gap-2">
-                                                {merchant.sector === 'Internet' && <div className="p-1.5 rounded-lg bg-cyan-100 text-cyan-600"><Wifi size={14} /></div>}
-                                                {merchant.sector === 'Cable' && <div className="p-1.5 rounded-lg bg-purple-100 text-purple-600"><Tv size={14} /></div>}
-                                                {merchant.sector === 'Fitness' && <div className="p-1.5 rounded-lg bg-orange-100 text-orange-600"><Dumbbell size={14} /></div>}
-                                                <span className="font-medium text-slate-700">{merchant.sector}</span>
-                                            </div>
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-slate-100 text-slate-800">
+                                                {merchant.sector}
+                                            </span>
                                         </td>
-                                        <td className="px-6 py-5 text-right">
-                                            <div className="font-bold text-slate-700">{merchant.subscribers.toLocaleString()}</div>
-                                        </td>
-                                        <td className="px-6 py-5 text-right">
-                                            <div className="font-bold text-slate-900">{merchant.tpv}</div>
-                                        </td>
-                                        <td className="px-6 py-5 text-right">
-                                            <div className="font-bold text-green-600">{merchant.revenue}</div>
-                                        </td>
+                                        <td className="px-6 py-5 text-right font-medium text-slate-600">{merchant.subscribers.toLocaleString()}</td>
+                                        <td className="px-6 py-5 text-right font-bold text-slate-900">{merchant.tpv}</td>
+                                        <td className="px-6 py-5 text-right font-bold text-green-600">{merchant.revenue}</td>
                                         <td className="px-6 py-5 text-right">
                                             <div className={`inline-flex items-center gap-1 font-bold ${merchant.growth >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
                                                 {merchant.growth >= 0 ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
@@ -203,40 +230,25 @@ const ActiveMerchantsTable = () => {
                                         </td>
                                         <td className="px-6 py-5 text-center">
                                             <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${merchant.status === 'Active'
-                                                ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.2)]'
+                                                ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20'
                                                 : 'bg-rose-500/10 text-rose-600 border-rose-500/20'
                                                 }`}>
-                                                <div className={`w-1.5 h-1.5 rounded-full ${merchant.status === 'Active' ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
                                                 {merchant.status}
                                             </div>
                                         </td>
                                         <td className="px-6 py-5 text-right">
-                                            <div className="flex items-center justify-end gap-2 opacity-60 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
-                                                <motion.button
-                                                    whileHover={{ scale: 1.1 }}
-                                                    whileTap={{ scale: 0.95 }}
-                                                    className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                                                >
+                                            <div className="flex items-center justify-end gap-2">
+                                                <button onClick={() => setSelectedMerchant(merchant)} className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                                                     <Eye size={18} />
-                                                </motion.button>
+                                                </button>
                                                 {merchant.status === 'Active' ? (
-                                                    <motion.button
-                                                        whileHover={{ scale: 1.1 }}
-                                                        whileTap={{ scale: 0.95 }}
-                                                        onClick={() => handleDeactivate(merchant.id)}
-                                                        className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
-                                                    >
+                                                    <button onClick={() => handleDeactivateClick(merchant.id)} className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
                                                         <Ban size={18} />
-                                                    </motion.button>
+                                                    </button>
                                                 ) : (
-                                                    <motion.button
-                                                        whileHover={{ scale: 1.1 }}
-                                                        whileTap={{ scale: 0.95 }}
-                                                        onClick={() => handleActivate(merchant.id)}
-                                                        className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
-                                                    >
+                                                    <button onClick={() => handleActivate(merchant.id)} className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors">
                                                         <Power size={18} />
-                                                    </motion.button>
+                                                    </button>
                                                 )}
                                             </div>
                                         </td>
@@ -256,7 +268,75 @@ const ActiveMerchantsTable = () => {
                     </div>
                 </div>
             </div>
-        </div>
+
+            {/* Merchant Details Modal */}
+            <AnimatePresence>
+                {selectedMerchant && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-end bg-black/50 backdrop-blur-sm"
+                        onClick={() => setSelectedMerchant(null)}
+                    >
+                        <motion.div
+                            initial={{ x: "100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "100%" }}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className="bg-slate-50 w-full max-w-4xl h-full shadow-2xl overflow-y-auto"
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <MerchantDetailsModalContent merchant={selectedMerchant} onClose={() => setSelectedMerchant(null)} />
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Deactivation Modal */}
+            <AnimatePresence>
+                {deactivateId && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, y: 20 }}
+                            animate={{ scale: 1, y: 0 }}
+                            exit={{ scale: 0.9, y: 20 }}
+                            className="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden"
+                        >
+                            <div className="bg-red-50 p-6 flex items-center gap-4 border-b border-red-100">
+                                <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+                                    <AlertCircle size={24} />
+                                </div>
+                                <div>
+                                    <h3 className="text-lg font-bold text-red-900">Deactivate Merchant</h3>
+                                    <p className="text-sm text-red-600">This action will suspend access immediately.</p>
+                                </div>
+                            </div>
+                            <div className="p-6 space-y-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Reason for Deactivation</label>
+                                    <textarea
+                                        value={deactivateReason}
+                                        onChange={(e) => setDeactivateReason(e.target.value)}
+                                        className="w-full h-24 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500/20 focus:border-red-500 outline-none resize-none"
+                                        placeholder="Please detail the reason..."
+                                    ></textarea>
+                                </div>
+                                <div className="flex gap-3 justify-end">
+                                    <button onClick={() => setDeactivateId(null)} className="px-5 py-2.5 rounded-xl text-gray-600 font-medium hover:bg-gray-100 transition-colors">Cancel</button>
+                                    <button onClick={confirmDeactivate} className="px-5 py-2.5 rounded-xl bg-red-600 text-white font-bold hover:bg-red-700 shadow-lg shadow-red-500/30 transition-shadow">Deactivate</button>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div >
     );
 };
 

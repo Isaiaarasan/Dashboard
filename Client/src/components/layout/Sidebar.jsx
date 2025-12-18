@@ -10,16 +10,19 @@ import {
   Activity,
   Settings,
   ShieldCheck,
+  MessageSquare,
 } from "lucide-react";
 
 const Sidebar = () => {
   const menuItems = [
     { icon: Home, label: "Overview", path: "/" },
     { icon: Users, label: "Merchants", path: "/merchants" },
+    { icon: ShieldCheck, label: "Approvals", path: "/approvals", badge: 3 },
     { icon: PieChart, label: "Analytics", path: "/analytics" },
     { icon: AlertTriangle, label: "Alerts", path: "/alerts", badge: 7 },
     { icon: CreditCard, label: "Settlements", path: "/settlements" },
     { icon: Activity, label: "System Health", path: "/health" },
+    { icon: MessageSquare, label: "Tickets", path: "/tickets", badge: 5 },
   ];
 
   return (
@@ -41,7 +44,7 @@ const Sidebar = () => {
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-4 space-y-2 relative z-10 py-4">
+      <nav className="flex-1 px-4 space-y-2 relative z-10 py-4 overflow-y-auto custom-scrollbar">
         {menuItems.map((item, index) => (
           <NavLink
             key={index}

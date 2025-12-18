@@ -15,6 +15,11 @@ import Settlements from "./pages/Settlements";
 import SystemHealth from "./pages/SystemHealth";
 import Settings from "./pages/Settings";
 
+import Approvals from "./pages/Approvals";
+import Tickets from "./pages/Tickets";
+import Managers from "./pages/Managers";
+import Customers from "./pages/Customers";
+
 function App() {
   return (
     <Router>
@@ -22,6 +27,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/merchants" element={<Merchants />} />
+          <Route path="/managers" element={<Managers />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/approvals" element={<Approvals />} />
+          <Route path="/tickets" element={<Tickets />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/settlements" element={<Settlements />} />
