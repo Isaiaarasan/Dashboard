@@ -3,11 +3,11 @@ import { Download, Search, Filter } from "lucide-react";
 
 const Settlements = () => {
     const settlements = [
-        { id: "SET-2024-001", from: "SubversePay", to: "SpeedNet ISP", amount: "₹45,200.00", status: "Completed", date: "Oct 24, 2024", bankLogo: "HDFC" },
-        { id: "SET-2024-002", from: "SubversePay", to: "CableNet Sols", amount: "₹12,450.00", status: "Processing", date: "Oct 24, 2024", bankLogo: "ICICI" },
-        { id: "SET-2024-003", from: "SubversePay", to: "FitZone Gyms", amount: "₹8,900.00", status: "Failed", date: "Oct 23, 2024", bankLogo: "SBI" },
-        { id: "SET-2024-004", from: "SubversePay", to: "TechStart Hub", amount: "₹1,25,000.00", status: "Completed", date: "Oct 23, 2024", bankLogo: "AXIS" },
-        { id: "SET-2024-005", from: "SubversePay", to: "Coffee House", amount: "₹3,400.00", status: "Completed", date: "Oct 22, 2024", bankLogo: "PNB" },
+        { id: "SET-2024-001", from: "SystemPay", to: "SpeedNet ISP", amount: "₹45,200.00", status: "Completed", date: "Oct 24, 2024", bankLogo: "HDFC" },
+        { id: "SET-2024-002", from: "SystemPay", to: "CableNet Sols", amount: "₹12,450.00", status: "Processing", date: "Oct 24, 2024", bankLogo: "ICICI" },
+        { id: "SET-2024-003", from: "SystemPay", to: "FitZone Gyms", amount: "₹8,900.00", status: "Failed", date: "Oct 23, 2024", bankLogo: "SBI" },
+        { id: "SET-2024-004", from: "SystemPay", to: "TechStart Hub", amount: "₹1,25,000.00", status: "Completed", date: "Oct 23, 2024", bankLogo: "AXIS" },
+        { id: "SET-2024-005", from: "SystemPay", to: "Coffee House", amount: "₹3,400.00", status: "Completed", date: "Oct 22, 2024", bankLogo: "PNB" },
     ];
 
     return (

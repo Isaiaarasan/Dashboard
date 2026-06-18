@@ -19,26 +19,37 @@ import Approvals from "./pages/Approvals";
 import Tickets from "./pages/Tickets";
 import Managers from "./pages/Managers";
 import Customers from "./pages/Customers";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/merchants" element={<Merchants />} />
-          <Route path="/managers" element={<Managers />} />
-          <Route path="/customers" element={<Customers />} />
-          <Route path="/approvals" element={<Approvals />} />
-          <Route path="/tickets" element={<Tickets />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/alerts" element={<Alerts />} />
-          <Route path="/settlements" element={<Settlements />} />
-          <Route path="/health" element={<SystemHealth />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/*"
+          element={
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/merchants" element={<Merchants />} />
+                <Route path="/managers" element={<Managers />} />
+                <Route path="/customers" element={<Customers />} />
+                <Route path="/approvals" element={<Approvals />} />
+                <Route path="/tickets" element={<Tickets />} />
+                <Route path="/analytics" element={<Analytics />} />
+                <Route path="/alerts" element={<Alerts />} />
+                <Route path="/settlements" element={<Settlements />} />
+                <Route path="/health" element={<SystemHealth />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Layout>
+          }
+        />
+      </Routes>
     </Router>
   );
 }

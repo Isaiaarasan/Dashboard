@@ -43,7 +43,7 @@ const Settings = () => {
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-lg text-gray-900">Super Admin</h3>
-                                    <p className="text-gray-500 text-sm">admin@subverse.ai</p>
+                                    <p className="text-gray-500 text-sm">admin@example.com</p>
                                     <button className="mt-2 text-sm text-blue-600 font-medium hover:underline">Upload new picture</button>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@ const Settings = () => {
                                     <label className="text-sm font-medium text-gray-700">Email Address</label>
                                     <div className="relative">
                                         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">@</div>
-                                        <input type="email" defaultValue="admin@subverse.ai" className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-blue-500" />
+                                        <input type="email" defaultValue="admin@example.com" className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-blue-500" />
                                     </div>
                                 </div>
                             </div>

@@ -3,9 +3,9 @@ import { Search, Filter, Download, UserCheck } from "lucide-react";
 
 const Managers = () => {
     const managers = [
-        { id: 1, name: "John Doe", email: "john@subverse.ai", role: "Ops Manager", lastActive: "2 mins ago" },
-        { id: 2, name: "Jane Smith", email: "jane@subverse.ai", role: "Support Lead", lastActive: "1 hour ago" },
-        { id: 3, name: "Mike Johnson", email: "mike@subverse.ai", role: "Finance Manager", lastActive: "1 day ago" },
+        { id: 1, name: "John Doe", email: "john@example.com", role: "Ops Manager", lastActive: "2 mins ago" },
+        { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Support Lead", lastActive: "1 hour ago" },
+        { id: 3, name: "Mike Johnson", email: "mike@example.com", role: "Finance Manager", lastActive: "1 day ago" },
     ];
 
     return (

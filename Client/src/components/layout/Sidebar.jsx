@@ -37,7 +37,7 @@ const Sidebar = () => {
             <ShieldCheck size={24} strokeWidth={2.5} />
           </div>
           <h1 className="text-xl font-bold tracking-tight text-white">
-            Subverse<span className="text-blue-400">Pay</span>
+            Dash<span className="text-blue-400">board</span>
           </h1>
         </div>
         <p className="text-xs text-slate-400 font-medium pl-14">Super Admin</p>
