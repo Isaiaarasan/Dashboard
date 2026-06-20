@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Home,
@@ -11,9 +11,18 @@ import {
   Settings,
   ShieldCheck,
   MessageSquare,
+  LogOut,
 } from "lucide-react";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   const menuItems = [
     { icon: Home, label: "Overview", path: "/" },
     { icon: Users, label: "Merchants", path: "/merchants" },
@@ -85,7 +94,7 @@ const Sidebar = () => {
       </nav>
 
       {/* Bottom Actions */}
-      <div className="p-4 relative z-10 border-t border-slate-800/50">
+      <div className="p-4 relative z-10 border-t border-slate-800/50 space-y-2">
         <NavLink
           to="/settings"
           className={({ isActive }) =>
@@ -96,6 +105,14 @@ const Sidebar = () => {
           <Settings size={20} className="group-hover:rotate-90 transition-transform duration-500" />
           <span className="font-medium">Settings</span>
         </NavLink>
+
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 px-4 py-3 rounded-xl transition-all w-full group text-slate-400 hover:text-red-400 hover:bg-red-500/10"
+        >
+          <LogOut size={20} className="transition-transform duration-300 group-hover:-translate-x-1" />
+          <span className="font-medium">Log Out</span>
+        </button>
       </div>
     </aside>
   );

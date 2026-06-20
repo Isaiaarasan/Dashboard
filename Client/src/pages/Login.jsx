@@ -140,12 +140,12 @@ const Login = () => {
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-slate-700/50"></div>
               </div>
-              <div className="relative flex justify-center text-sm">
+              {/* <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-slate-900/50 text-slate-400">or</span>
-              </div>
+              </div> */}
             </div>
 
-            <button
+            {/* <button
               onClick={() => {
                 setFormData({ email: 'demo@example.com', password: 'password123' });
                 // Need a tiny delay for state to update before submitting, or just submit directly
@@ -155,7 +155,7 @@ const Login = () => {
               className="w-full mt-6 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-white border border-slate-700 rounded-xl py-3 font-medium flex items-center justify-center transition-all"
             >
               Login as Demo User
-            </button>
+            </button> */}
           </div>
 
           <p className="mt-8 text-center text-slate-400 text-sm">

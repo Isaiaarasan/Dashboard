@@ -6,11 +6,13 @@ const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSignup = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccessMessage('');
     setLoading(true);
 
     try {
@@ -26,9 +28,8 @@ const Signup = () => {
         throw new Error(data.message || 'Signup failed');
       }
 
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-      navigate('/');
+      setSuccessMessage(data.message);
+      setFormData({ name: '', email: '', password: '' });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -59,6 +60,12 @@ const Signup = () => {
           {error && (
             <div className="bg-red-500/10 border border-red-500/50 text-red-400 text-sm p-3 rounded-xl mb-6 text-center">
               {error}
+            </div>
+          )}
+
+          {successMessage && (
+            <div className="bg-emerald-500/10 border border-emerald-500/50 text-emerald-400 text-sm p-3 rounded-xl mb-6 text-center">
+              {successMessage}
             </div>
           )}
 
