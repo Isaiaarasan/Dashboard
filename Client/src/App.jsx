@@ -22,6 +22,8 @@ import Customers from "./pages/Customers";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
+import PrivateRoute from "./components/PrivateRoute";
+
 function App() {
   return (
     <Router>
@@ -31,22 +33,24 @@ function App() {
         <Route
           path="/*"
           element={
-            <Layout>
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/merchants" element={<Merchants />} />
-                <Route path="/managers" element={<Managers />} />
-                <Route path="/customers" element={<Customers />} />
-                <Route path="/approvals" element={<Approvals />} />
-                <Route path="/tickets" element={<Tickets />} />
-                <Route path="/analytics" element={<Analytics />} />
-                <Route path="/alerts" element={<Alerts />} />
-                <Route path="/settlements" element={<Settlements />} />
-                <Route path="/health" element={<SystemHealth />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
-            </Layout>
+            <PrivateRoute>
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/merchants" element={<Merchants />} />
+                  <Route path="/managers" element={<Managers />} />
+                  <Route path="/customers" element={<Customers />} />
+                  <Route path="/approvals" element={<Approvals />} />
+                  <Route path="/tickets" element={<Tickets />} />
+                  <Route path="/analytics" element={<Analytics />} />
+                  <Route path="/alerts" element={<Alerts />} />
+                  <Route path="/settlements" element={<Settlements />} />
+                  <Route path="/health" element={<SystemHealth />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+              </Layout>
+            </PrivateRoute>
           }
         />
       </Routes>
